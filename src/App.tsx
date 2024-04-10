@@ -8,12 +8,14 @@ import { ThemeProvider } from "@/components/theme-provider.tsx";
 import Home from "@/pages/Home.tsx";
 import Layout2 from "@/pages/Layout.tsx";
 import Sets from "@/pages/Sets.tsx";
+import Cards from "@/pages/Cards.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout2 />}>
       <Route index element={<Home />} />
       <Route path="sets" element={<Sets />} />
+      <Route path="sets/:id" element={<Cards />} />
     </Route>
   )
 );
