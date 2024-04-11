@@ -17,7 +17,7 @@ function MenuLink({ item, onClick }: Props) {
           new RegExp("^" + item.path + "/\\d+$").test(pathname)
             ? "text-foreground "
             : "text-muted-foreground "
-        } transition-colors hover:text-foreground flex items-center`}
+        } transition-colors hover:text-foreground flex whitespace-nowrap items-center`}
         onClick={onClick}
       >
         {item.icon}
