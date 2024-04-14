@@ -10,6 +10,7 @@ import Layout2 from "@/pages/Layout.tsx";
 import Sets from "@/pages/Sets.tsx";
 import Cards from "@/pages/Cards.tsx";
 import CreateCard from "@/pages/CreateCard.tsx";
+import ErrorPage from "@/pages/ErrorPage.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path="sets" element={<Sets />} />
       <Route path="sets/:id" element={<Cards />} />
       <Route path="card" element={<CreateCard />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );

@@ -14,18 +14,20 @@ function CreateCard() {
   const frontEditor = new EditorJS({
     holder: "frontEditor",
     tools: tools,
+    placeholder: "Enter a text for front side",
   } as EditorConfig);
   const backEditor = new EditorJS({
     holder: "backEditor",
     tools: tools,
+    placeholder: "Enter a text for back side",
   } as EditorConfig);
 
   return (
     <>
-      <div className="flex justify-between gap-4 mb-4 md:mb-0">
+      <div className="flex justify-between gap-2 mb-4 md:mb-0 md:gap-4">
         <div>
           <Select>
-            <SelectTrigger className="w-[180px] md:w-[240px]">
+            <SelectTrigger className="w-[120px] md:w-[240px]">
               <SelectValue placeholder="Select card set" />
             </SelectTrigger>
             <SelectContent>
@@ -35,7 +37,7 @@ function CreateCard() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4">
           <Button variant="outline">Discard</Button>
           <Button>Save</Button>
         </div>

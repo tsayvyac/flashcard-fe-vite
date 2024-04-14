@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { BrainCircuit, Home, Layers, SquarePlus } from "lucide-react";
+import { BrainCircuit, Home, Layers } from "lucide-react";
 import MenuLink from "@/components/MenuLink.tsx";
 import NavRightSide from "@/components/NavRightSide.tsx";
 import MobileNavPart from "@/components/MobileNavPart.tsx";
@@ -22,11 +22,6 @@ export const menuItems: Item[] = [
     title: "Sets",
     path: "/sets",
     icon: <Layers className={iconSize} />,
-  },
-  {
-    title: "Create card",
-    path: "/card",
-    icon: <SquarePlus className={iconSize} />,
   },
 ];
 
