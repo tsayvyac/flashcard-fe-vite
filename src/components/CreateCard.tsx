@@ -5,10 +5,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select.tsx";
 import EditorJS, { EditorConfig } from "@editorjs/editorjs";
 import tools from "@/components/toolsEditor.tsx";
 import Editor from "@/components/Editor.tsx";
+import { useNavigate } from "react-router-dom";
 
 function CreateCard() {
   const frontEditor = new EditorJS({
@@ -24,7 +25,7 @@ function CreateCard() {
 
   return (
     <>
-      <div className="flex justify-between gap-2 mb-4 md:mb-0 md:gap-4">
+      <div className="flex justify-between gap-2 mb-4 md:mb-4 md:gap-4">
         <div>
           <Select>
             <SelectTrigger className="w-[120px] md:w-[240px]">
@@ -37,10 +38,7 @@ function CreateCard() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2 md:gap-4">
-          <Button variant="outline">Discard</Button>
-          <Button>Save</Button>
-        </div>
+        <Button>Save</Button>
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">
         <Editor id="frontEditor" title="Front side" />

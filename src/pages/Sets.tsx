@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import SetCard from "@/components/SetCard.tsx";
-import AddCard from "@/components/AddCard.tsx";
 import {
   Pagination,
   PaginationContent,
@@ -10,35 +8,22 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import AddSetDialog from "@/components/AddSetDialog.tsx";
 
 function Sets() {
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <div>
-          <AddCard />
+          <AddSetDialog />
         </div>
-        <Link to={`/sets/${1}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${2}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${3}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${4}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${5}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${6}`}>
-          <SetCard />
-        </Link>
-        <Link to={`/sets/${7}`}>
-          <SetCard />
-        </Link>
+        <SetCard />
+        <SetCard />
+        <SetCard />
+        <SetCard />
+        <SetCard />
+        <SetCard />
+        <SetCard />
       </div>
       <div className="mt-12">
         <Pagination>

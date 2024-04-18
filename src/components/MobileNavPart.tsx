@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { BrainCircuit, Menu } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import MenuLink from "@/components/MenuLink.tsx";
-import { menuItems } from "@/pages/Layout.tsx";
+import { menuItems } from "@/components/Layout.tsx";
 
 function MobileNavPart() {
   const closeDialog = () => document.getElementById("closeBtn")?.click();

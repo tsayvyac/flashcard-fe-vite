@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Item } from "@/pages/Layout.tsx";
+import { Item } from "@/components/Layout.tsx";
 
 interface Props {
   item: Item;
