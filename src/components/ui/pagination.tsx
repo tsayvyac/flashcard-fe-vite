@@ -1,8 +1,15 @@
 import * as React from "react";
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  MoreHorizontal,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { ButtonProps, buttonVariants } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -36,22 +43,26 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  page?: number;
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">;
 
 const PaginationLink = ({
   className,
   isActive,
+  page,
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
+    to={`?page=${page}`}
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({
-        variant: isActive ? "outline" : "ghost",
+        variant: isActive ? "secondary" : "ghost",
         size,
       }),
+      isActive ? "pointer-events-none" : "",
       className
     )}
     {...props}
@@ -89,6 +100,36 @@ const PaginationNext = ({
 );
 PaginationNext.displayName = "PaginationNext";
 
+const PaginationEnd = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to next page"
+    size="default"
+    className={cn("gap-1", className)}
+    {...props}
+  >
+    <ChevronsRight className="h-4 w-4" />
+  </PaginationLink>
+);
+PaginationNext.displayName = "PaginationEnd";
+
+const PaginationStart = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to next page"
+    size="default"
+    className={cn("gap-1", className)}
+    {...props}
+  >
+    <ChevronsLeft className="h-4 w-4" />
+  </PaginationLink>
+);
+PaginationNext.displayName = "PaginationStart";
+
 const PaginationEllipsis = ({
   className,
   ...props
@@ -112,4 +153,6 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationEnd,
+  PaginationStart,
 };

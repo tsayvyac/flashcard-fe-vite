@@ -21,17 +21,17 @@ interface SetsToStudy {
 export const dummy: SetsToStudy[] = [
   {
     id: 1,
-    title: "Set 1",
+    title: "[Set]",
     flashcardsToStudy: 10,
   },
   {
     id: 2,
-    title: "Set 2",
+    title: "[Set]",
     flashcardsToStudy: 6,
   },
   {
     id: 3,
-    title: "Set 3",
+    title: "[Set]",
     flashcardsToStudy: 2,
   },
 ];
@@ -73,7 +73,7 @@ export const columns: ColumnDef<SetsToStudy>[] = [
                   trigger={
                     <Link
                       to={`/study/${set.id}?mode=spaced`}
-                      className="w-full"
+                      className="w-full flex justify-start"
                     >
                       Study
                     </Link>
@@ -85,12 +85,15 @@ export const columns: ColumnDef<SetsToStudy>[] = [
               <DropdownMenuItem>
                 <CoTooltip
                   trigger={
-                    <Link to={`/study/${set.id}?mode=cram`} className="w-full">
+                    <Link
+                      to={`/study/${set.id}?mode=cram`}
+                      className="w-full flex justify-start"
+                    >
                       Cram
                     </Link>
                   }
                   description="Study all flashcards in this set. Will not affect study progress"
-                  className="w-full"
+                  className="w-full block"
                 />
               </DropdownMenuItem>
             </DropdownMenuContent>

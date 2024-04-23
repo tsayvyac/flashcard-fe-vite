@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
 import { ChevronLeft, Plus } from "lucide-react";
-import CardDisplay from "@/components/card-display.tsx";
+import CardDisplay from "@/components/CardDisplay.tsx";
 import {
   Pagination,
   PaginationContent,
@@ -28,7 +28,7 @@ function Cards() {
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <div className="text-xl font-medium md:text-3xl">
-          Flashcard set&nbsp;
+          [Set name]&nbsp;
           <span className="text-muted-foreground">(3)</span>
         </div>
         <AddCardDialog

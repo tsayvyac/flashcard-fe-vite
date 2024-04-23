@@ -21,9 +21,9 @@ function Home() {
           <Card className="sm:col-span-2">
             <CardHeader className="pb-4">
               <CardDescription className="leading-relaxed">
-                You can create a new card by either clicking the &quot;New
+                You can create a new flashcard by either clicking the &quot;New
                 Flashcard&quot; button or navigating to the &quot;Sets&quot;
-                section and selecting the desired set to create your card.
+                section and selecting the desired set to create your flashcard.
               </CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-between">
@@ -43,7 +43,7 @@ function Home() {
             <Card>
               <CardHeader className="pb-2">
                 <CardDescription>Study streak</CardDescription>
-                <CardTitle className="text-4xl">2</CardTitle>
+                <CardTitle className="text-4xl">[n]</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-xs text-muted-foreground">
@@ -54,7 +54,7 @@ function Home() {
             <Card>
               <CardHeader className="pb-2">
                 <CardDescription>To study</CardDescription>
-                <CardTitle className="text-4xl">120</CardTitle>
+                <CardTitle className="text-4xl">[n]</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-xs text-muted-foreground">

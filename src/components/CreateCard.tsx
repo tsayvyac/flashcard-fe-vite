@@ -9,7 +9,7 @@ import {
 import EditorJS, { EditorConfig } from "@editorjs/editorjs";
 import tools from "@/components/toolsEditor.tsx";
 import Editor from "@/components/Editor.tsx";
-import { useNavigate } from "react-router-dom";
+import CoTooltip from "@/components/CoTooltip.tsx";
 
 function CreateCard() {
   const frontEditor = new EditorJS({
@@ -38,7 +38,16 @@ function CreateCard() {
             </SelectContent>
           </Select>
         </div>
-        <Button>Save</Button>
+        <div className="flex gap-4">
+          <CoTooltip
+            trigger={<Button>Save</Button>}
+            description="Save this flashcard and close dialog"
+          />
+          <CoTooltip
+            trigger={<Button>Save + Add</Button>}
+            description="Save this flashcard and create another new flashcard"
+          />
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">
         <Editor id="frontEditor" title="Front side" />

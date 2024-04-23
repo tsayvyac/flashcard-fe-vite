@@ -14,14 +14,18 @@ import {
 import { Badge } from "@/components/ui/badge.tsx";
 import { Card } from "@/components/ui/card.tsx";
 import { useState } from "react";
+import { Progress } from "@/components/ui/progress.tsx";
 
 function Learn() {
   const navigation = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [hidden, setHidden] = useState<boolean>(true);
+  let current: number = 2;
+  let total: number = 30;
 
   return (
     <>
+      <Progress value={(current / total) * 100} />
       <div className="bg-muted/40 min-h-screen w-full md:p-8 p-4">
         <div className="flex flex-1 flex-row justify-between items-center gap-4 md:gap-8">
           <Dialog>
@@ -54,9 +58,10 @@ function Learn() {
             </span>
             <div className="text-lg md:text-3xl font-bold">&nbsp;Set title</div>
           </div>
-          <Badge variant="outline" className="ml-4 md:text-base">
-            2/30
-          </Badge>
+          <Badge
+            variant="outline"
+            className="ml-4 md:text-base"
+          >{`${current}/${total}`}</Badge>
         </div>
         <div className="grid grid-cols-1 md:mt-16 mt-8 md:grid-cols-2 md:gap-8 gap-2 md:grid-rows-[60vh] grid-rows-[35vh_35vh]">
           <Card className="block p-4 overflow-y-auto break-all">asds</Card>

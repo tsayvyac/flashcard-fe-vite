@@ -6,17 +6,18 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import Home from "@/pages/Home.tsx";
-import Layout2 from "@/components/Layout.tsx";
-import Sets from "@/pages/Sets.tsx";
+import Layout from "@/components/Layout.tsx";
 import Cards from "@/pages/Cards.tsx";
 import CreateCard from "@/components/CreateCard.tsx";
 import ErrorPage from "@/pages/ErrorPage.tsx";
 import Learn from "@/pages/Learn.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import Sets from "@/pages/Sets.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Layout2 />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="sets" element={<Sets />} />
         <Route path="sets/:id" element={<Cards />} />
@@ -31,7 +32,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="ui-theme">
-      <RouterProvider router={router} />
+      <TooltipProvider>
+        <RouterProvider router={router} />
+      </TooltipProvider>
     </ThemeProvider>
   );
 }
