@@ -6,14 +6,43 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
-import { buttonVariants } from "@/components/ui/button.tsx";
-import { Link } from "react-router-dom";
 import { DataTable } from "@/components/data-table/data-table.tsx";
-import { columns, dummy } from "@/components/data-table/columns.tsx";
+import { columns } from "@/components/data-table/columns.tsx";
 import AddCardDialog from "@/components/AddCardDialog.tsx";
 import Block from "@/components/ui/block.tsx";
+import { useEffect, useState } from "react";
+import CardSetService, { SetPage } from "@/api/CardSetService.ts";
+import { Flashcard } from "@/api/FlashcardService.ts";
+import AddSetDialog from "@/components/AddSetDialog.tsx";
 
 function Home() {
+  const [sets, setSets] = useState<SetPage>({
+    list: [],
+    pageNo: 1,
+    pageSize: 11,
+    totalElement: 0,
+    totalPages: 0,
+    isLast: true,
+  });
+  const [key, setKey] = useState<number>(0);
+  const [isPending, setIsPending] = useState<-1 | 0 | 1>(0);
+  useEffect(() => {
+    const fetchAll = async () => {
+      await CardSetService.getRepSets(0)
+        .then((res) => {
+          setSets(res);
+          setIsPending(1);
+        })
+        .catch(() => setIsPending(-1));
+    };
+
+    void fetchAll();
+  }, [key]);
+
+  const addNewCard = (newCard: Flashcard) => {
+    setKey(newCard.id);
+  };
+
   return (
     <>
       <main className="grid flex-1 items-start gap-4 p-0 md:p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
@@ -30,13 +59,15 @@ function Home() {
               <AddCardDialog
                 trigger={<Block>New Flashcard</Block>}
                 title="New Flashcard"
+                addNewCard={addNewCard}
+                idOfSet={0}
               />
-              <Link
-                to="/help"
-                className={buttonVariants({ variant: "outline" })}
-              >
-                Help
-              </Link>
+              <AddSetDialog
+                pushNewSet={() => {
+                  //
+                }}
+                isButton={true}
+              />
             </CardFooter>
           </Card>
           <div className="grid grid-cols-2 gap-4 mt-4">
@@ -70,11 +101,16 @@ function Home() {
             <CardHeader className="px-7 bg-muted/50">
               <CardTitle>Flashcard sets</CardTitle>
               <CardDescription>
-                Flashcard sets you can start study today.
+                Flashcard sets you can start study today. Only 10 at most are
+                shown.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <DataTable columns={columns} data={dummy} />
+              <DataTable
+                columns={columns}
+                data={sets.list}
+                isPending={isPending}
+              />
             </CardContent>
           </Card>
         </div>

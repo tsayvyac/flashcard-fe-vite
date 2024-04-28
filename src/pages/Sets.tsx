@@ -1,7 +1,7 @@
 import SetCard from "@/components/SetCard.tsx";
 import AddSetDialog from "@/components/AddSetDialog.tsx";
 import { useEffect, useState } from "react";
-import CardSetService, { SetList, Set } from "@/api/CardSetService.ts";
+import CardSetService, { SetPage, Set } from "@/api/CardSetService.ts";
 import CoPagination from "@/components/CoPagination.tsx";
 import { useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/use-toast.ts";
 import LoadingIndicator from "@/components/LoadingIndicator.tsx";
 
 function Sets() {
-  const [sets, setSets] = useState<SetList>({
+  const [sets, setSets] = useState<SetPage>({
     list: [],
     pageNo: 1,
     pageSize: 11,
@@ -92,7 +92,7 @@ function Sets() {
             ))}
           </div>
           <div className="mt-12">
-            <CoPagination totalPages={sets?.totalPages} page={page} />
+            <CoPagination totalPages={sets.totalPages} page={page} />
           </div>
         </>
       ) : (

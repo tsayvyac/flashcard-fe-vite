@@ -5,6 +5,8 @@ interface BlockProps {
   children: React.ReactNode;
   size?: BlockSize;
   variant?: BlockVariant;
+  disabled?: boolean;
+  onClick?: () => void | Promise<void>;
 }
 
 const styles: { [key in BlockSize]: string } = {
@@ -23,12 +25,15 @@ function Block({
   children,
   variant = "default",
   size = "default",
+  disabled = false,
+  onClick,
 }: BlockProps) {
   const sizeStyle = styles[size];
   const variantStyle = variants[variant];
   return (
     <div
-      className={`${sizeStyle} ${variantStyle} inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50`}
+      className={`${sizeStyle} ${variantStyle} ${disabled ? "pointer-events-none opacity-50" : ""} inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer`}
+      onClick={onClick}
     >
       {children}
     </div>

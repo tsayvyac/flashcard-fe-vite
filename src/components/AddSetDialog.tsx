@@ -14,12 +14,14 @@ import { Button } from "@/components/ui/button.tsx";
 import { FormEvent, useState } from "react";
 import { useToast } from "@/components/ui/use-toast.ts";
 import CardSetService, { Set } from "@/api/CardSetService.ts";
+import Block from "@/components/ui/block.tsx";
 
 interface AddSetDialogProps {
   pushNewSet: (newSet: Set) => void;
+  isButton?: boolean;
 }
 
-function AddSetDialog({ pushNewSet }: AddSetDialogProps) {
+function AddSetDialog({ pushNewSet, isButton }: AddSetDialogProps) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -44,9 +46,13 @@ function AddSetDialog({ pushNewSet }: AddSetDialogProps) {
     <>
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogTrigger asChild>
-          <button className="rounded-lg border text-card-foreground shadow-sm h-full w-full bg-muted flex justify-center items-center hover:bg-background/80">
-            <Plus className="h-20 w-20 stroke-muted-foreground" />
-          </button>
+          {isButton ? (
+            <Block variant="outline">New Set</Block>
+          ) : (
+            <button className="rounded-lg border text-card-foreground shadow-sm h-full w-full bg-muted flex justify-center items-center hover:bg-background/80">
+              <Plus className="h-20 w-20 stroke-muted-foreground" />
+            </button>
+          )}
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <form onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 import { axios } from "./axiosConfig.ts";
+import { Flashcard, FlashcardPage } from "@/api/FlashcardService.ts";
 
-export interface SetList {
+export interface SetPage {
   list: Set[];
   pageNo: number;
   pageSize: number;
@@ -16,9 +17,36 @@ export interface Set {
   countAll: number;
 }
 
+export interface SetInfo {
+  id: number;
+  name: string;
+}
+
 export default class CardSetService {
-  static async getSets(page: number): Promise<SetList> {
-    const res = await axios.get<SetList>(`/sets?page=${page}&size=11`);
+  static async getSets(page: number) {
+    const res = await axios.get<SetPage>(`/sets?page=${page}&size=11`);
+    return res.data;
+  }
+
+  static async getSetById(id: number) {
+    const res = await axios.get<Set>(`/sets/${id}`);
+    return res.data;
+  }
+
+  static async getRepSets(page: number) {
+    const res = await axios.get<SetPage>(`/sets/rep?page=${page}&size=10`);
+    return res.data;
+  }
+
+  static async getCardsInSet(id: number, page: number) {
+    const res = await axios.get<FlashcardPage>(
+      `/sets/${id}/flashcards?page=${page}&size=12`
+    );
+    return res.data;
+  }
+
+  static async getAllCardSets() {
+    const res = await axios.get<SetInfo[]>("/sets/all");
     return res.data;
   }
 
@@ -32,5 +60,10 @@ export default class CardSetService {
 
   static async renameSet(id: number, req: { name: string }) {
     return await axios.patch<Set>(`/sets/${id}`, req);
+  }
+
+  static async getRepCards(id: number) {
+    const res = await axios.get<Flashcard[]>(`/${id}/repetition`);
+    return res.data;
   }
 }

@@ -5,13 +5,19 @@ import InlineCode from "@editorjs/inline-code";
 import Header from "@editorjs/header";
 import Marker from "@editorjs/marker";
 import SimpleImage from "@editorjs/simple-image";
-import NestedList from "@editorjs/nested-list";
-import Checklist from "@editorjs/checklist";
 import AlignmentBlockTune from "editorjs-text-alignment-blocktune";
 import Underline from "@editorjs/underline";
 import Paragraph from "@editorjs/paragraph";
+import List from "@editorjs/list";
 
 const EDITOR_JS_TOOLS = {
+  list: {
+    class: List,
+    inlineToolbar: true,
+    config: {
+      defaultStyle: "unordered",
+    },
+  },
   embed: {
     class: Embed,
   },
@@ -30,8 +36,6 @@ const EDITOR_JS_TOOLS = {
   },
   marker: Marker,
   simpleImage: SimpleImage,
-  nestedList: NestedList,
-  checklist: Checklist,
   align: {
     class: AlignmentBlockTune,
     config: {

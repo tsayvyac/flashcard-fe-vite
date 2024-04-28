@@ -11,43 +11,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import CoTooltip from "@/components/CoTooltip.tsx";
+import { Set } from "@/api/CardSetService.ts";
 
-interface SetsToStudy {
-  id: number;
-  title: string;
-  flashcardsToStudy: number;
-}
-
-export const dummy: SetsToStudy[] = [
+export const columns: ColumnDef<Set>[] = [
   {
-    id: 1,
-    title: "[Set]",
-    flashcardsToStudy: 10,
+    accessorKey: "name",
+    header: "Name",
   },
   {
-    id: 2,
-    title: "[Set]",
-    flashcardsToStudy: 6,
-  },
-  {
-    id: 3,
-    title: "[Set]",
-    flashcardsToStudy: 2,
-  },
-];
-
-export const columns: ColumnDef<SetsToStudy>[] = [
-  {
-    accessorKey: "title",
-    header: "Title",
-  },
-  {
-    accessorKey: "flashcardsToStudy",
+    accessorKey: "countRep",
     header: () => <div className="text-right">Flashcards to study</div>,
     cell: ({ row }) => {
       return (
         <div className="text-right">
-          <Badge>{row.getValue("flashcardsToStudy")}</Badge>
+          <Badge>{row.getValue("countRep")}</Badge>
         </div>
       );
     },
