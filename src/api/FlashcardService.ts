@@ -23,7 +23,11 @@ interface FlashcardReq {
   cardSetId: number;
 }
 
-type Score = -1 | 0 | 1;
+export type ScoreNums = -1 | 0 | 1;
+
+export interface Score {
+  score: ScoreNums;
+}
 
 export default class FlashcardService {
   static async createFlashcard(req: FlashcardReq) {
@@ -38,7 +42,8 @@ export default class FlashcardService {
     return await axios.patch<Flashcard>(`/flashcards/${id}`, req);
   }
 
-  static async updateProgress(id: number, req: Score) {
-    return await axios.put(`/flashcard/${id}/progress`, req);
+  static async updateProgress(id: number, req: number) {
+    const score = { score: req } as Score;
+    return await axios.put(`/flashcards/${id}/progress`, score);
   }
 }

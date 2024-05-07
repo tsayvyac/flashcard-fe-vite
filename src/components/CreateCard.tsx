@@ -10,11 +10,12 @@ import tools from "@/components/toolsEditor.tsx";
 import Editor from "@/components/Editor.tsx";
 import CoTooltip from "@/components/CoTooltip.tsx";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import CardSetService, { SetInfo } from "@/api/CardSetService.ts";
+import CardSetService, { Set } from "@/api/CardSetService.ts";
 import LoadingIndicator from "@/components/LoadingIndicator.tsx";
 import Block from "@/components/ui/block.tsx";
 import { Label } from "@/components/ui/label.tsx";
 import FlashcardService, { Flashcard } from "@/api/FlashcardService.ts";
+import { useToast } from "@/components/ui/use-toast.ts";
 
 interface CreateCardProps {
   idOfSet: number;
@@ -35,13 +36,14 @@ function CreateCard({
   isUpdate,
   setIsDialogOpen,
 }: CreateCardProps) {
-  const [setInfo, setSetInfo] = useState<SetInfo[]>([]);
+  const [setInfo, setSetInfo] = useState<Set[]>([]);
   const [isPending, setIsPending] = useState<boolean>(true);
   const [selected, setSelected] = useState<number>(idOfSet ? idOfSet : 0);
   const frontEditorRef = useRef<null | EditorJS>(null);
   const backEditorRef = useRef<null | EditorJS>(null);
   const isFrontReady = useRef<boolean>(false);
   const isBackReady = useRef<boolean>(false);
+  const { toast } = useToast();
   useEffect(() => {
     if (!isPending) {
       if (!isFrontReady.current) {
@@ -82,7 +84,10 @@ function CreateCard({
     void fetchAll();
   }, [isPending, isUpdate.back, isUpdate.front]);
 
-  const handleSaveOrUpdate = async (isNewCard: boolean) => {
+  const handleSaveOrUpdate = async (
+    isNewCard: boolean,
+    isContinue: boolean
+  ) => {
     const frontData = await frontEditorRef.current?.save();
     const backData = await backEditorRef.current?.save();
     if (
@@ -106,10 +111,21 @@ function CreateCard({
           (res) => isUpdate.updateCard(res.data)
         );
       }
+      toast({
+        description: `Flashcard was successfully created!`,
+      });
+      if (isContinue) {
+        frontEditorRef.current?.clear();
+        backEditorRef.current?.clear();
+      } else {
+        setIsDialogOpen(false);
+      }
     } else {
-      console.log("Please fill in all fields.");
+      toast({
+        variant: "destructive",
+        description: "Please fill in all fields.",
+      });
     }
-    setIsDialogOpen(false);
   };
 
   if (isPending) {
@@ -147,26 +163,27 @@ function CreateCard({
         </div>
         <div className="flex gap-4">
           {isUpdate.isUpd ? (
-            <Block onClick={() => handleSaveOrUpdate(false)}>Update</Block>
+            <Block onClick={() => handleSaveOrUpdate(false, false)}>
+              Update
+            </Block>
           ) : (
             <>
-              <CoTooltip
-                trigger={
-                  <Block
-                    disabled={setInfo.length === 0}
-                    onClick={() => handleSaveOrUpdate(true)}
-                  >
-                    Save
-                  </Block>
-                }
-                description="Save this flashcard and close dialog"
-              />
-              <CoTooltip
-                trigger={
-                  <Block disabled={setInfo.length === 0}>Save + Add</Block>
-                }
-                description="Save this flashcard and create another new flashcard"
-              />
+              <CoTooltip description="Save this flashcard and close dialog">
+                <Block
+                  disabled={setInfo.length === 0}
+                  onClick={() => handleSaveOrUpdate(true, false)}
+                >
+                  Save
+                </Block>
+              </CoTooltip>
+              <CoTooltip description="Save this flashcard and create another new flashcard">
+                <Block
+                  disabled={setInfo.length === 0}
+                  onClick={() => handleSaveOrUpdate(true, true)}
+                >
+                  Save + Add
+                </Block>
+              </CoTooltip>
             </>
           )}
         </div>

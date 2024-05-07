@@ -5,15 +5,15 @@ import {
 } from "@/components/ui/tooltip.tsx";
 
 interface TooltipProps {
-  trigger: React.ReactNode;
+  children: React.ReactNode;
   description: string;
   className?: string;
 }
 
-function CoTooltip({ trigger, description, className }: TooltipProps) {
+function CoTooltip({ children, description, className }: TooltipProps) {
   return (
     <Tooltip>
-      <TooltipTrigger className={className}>{trigger}</TooltipTrigger>
+      <TooltipTrigger className={className}>{children}</TooltipTrigger>
       <TooltipContent>
         <p>{description}</p>
       </TooltipContent>

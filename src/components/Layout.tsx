@@ -37,7 +37,7 @@ function Layout() {
               to="/"
               className="flex items-center gap-2 text-lg font-semibold md:text-base mr-3"
             >
-              <BrainCircuit className="h-8 w-8" />
+              <BrainCircuit className="h-8 w-8 hover:animate-pulse" />
               <span className="sr-only">Flashcards</span>
             </NavLink>
             {menuItems.map((item) => (

@@ -5,6 +5,7 @@ interface Block {
     text: string;
     level?: number;
     style?: string;
+    embed?: string;
     items?: string[];
     url?: string;
     caption?: string;
@@ -92,6 +93,15 @@ function Content({ block }: ContentProps) {
     case "code": {
       const code = `<code class="text-xs">${block.data.code}</code>`;
       content = `<div class="bg-muted rounded pl-2">${code}</div>`;
+      break;
+    }
+    case "embed": {
+      caption = block.data.caption ?? "";
+      const embed = `
+        <iframe width="315" height="200" allowfullscreen src="${block.data.embed}"/>
+         <small class="italic">${caption}</small>
+      `;
+      content = `<div class="flex flex-col items-center">${embed}</div>`;
       break;
     }
     default:

@@ -11,7 +11,7 @@ import { useState } from "react";
 
 interface AddCardDialogProps {
   title: string;
-  trigger: React.ReactNode;
+  children: React.ReactNode;
   idOfSet: number;
   addNewCard: (newCard: Flashcard) => void;
   isUpdate?: {
@@ -25,7 +25,7 @@ interface AddCardDialogProps {
 
 function AddCardDialog({
   title,
-  trigger,
+  children,
   idOfSet,
   addNewCard,
   isUpdate = {
@@ -42,7 +42,7 @@ function AddCardDialog({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[90%]">
         <DialogHeader>
           <DialogTitle className="mb-4">{title}</DialogTitle>

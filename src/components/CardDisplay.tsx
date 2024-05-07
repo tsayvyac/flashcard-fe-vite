@@ -52,11 +52,6 @@ function CardDisplay({
           </div>
           <div className="absolute inset-0 top-0 z-10 hidden justify-end p-4 items-end gap-4 group-hover:flex">
             <AddCardDialog
-              trigger={
-                <Block size="icon">
-                  <Pencil className="h-4 w-4" />
-                </Block>
-              }
               title="Edit flashcard"
               addNewCard={addNewCard}
               idOfSet={idOfSet}
@@ -67,7 +62,11 @@ function CardDisplay({
                 front: card.front,
                 back: card.back,
               }}
-            />
+            >
+              <Block size="icon">
+                <Pencil className="h-4 w-4" />
+              </Block>
+            </AddCardDialog>
             <Dialog>
               <DialogTrigger asChild>
                 <Button size="icon" variant="outline">

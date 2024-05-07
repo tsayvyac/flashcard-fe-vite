@@ -103,15 +103,14 @@ function Cards() {
           <span className="text-muted-foreground">({cards.list.length})</span>
         </div>
         <AddCardDialog
-          trigger={
-            <Block size="icon">
-              <Plus className="h-4 w-4" />
-            </Block>
-          }
           title="New Flashcard"
           idOfSet={idOfSet}
           addNewCard={addNewCard}
-        />
+        >
+          <Block size="icon">
+            <Plus className="h-4 w-4" />
+          </Block>
+        </AddCardDialog>
       </div>
       {cards.list.length ? (
         <>

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import CardSetService, { SetPage } from "@/api/CardSetService.ts";
 import { Flashcard } from "@/api/FlashcardService.ts";
 import AddSetDialog from "@/components/AddSetDialog.tsx";
+import LearnerService, { Stats } from "@/api/LearnerService.ts";
 
 function Home() {
   const [sets, setSets] = useState<SetPage>({
@@ -24,20 +25,35 @@ function Home() {
     totalPages: 0,
     isLast: true,
   });
+  const [countToStudy, setCountToStudy] = useState<number>(0);
   const [key, setKey] = useState<number>(0);
   const [isPending, setIsPending] = useState<-1 | 0 | 1>(0);
+  const [stats, setStats] = useState<Stats>({ good: 0 });
   useEffect(() => {
     const fetchAll = async () => {
       await CardSetService.getRepSets(0)
         .then((res) => {
           setSets(res);
           setIsPending(1);
+          setCountToStudy(
+            res.list.reduce((acc, currentSet) => acc + currentSet.countRep, 0)
+          );
         })
         .catch(() => setIsPending(-1));
     };
 
     void fetchAll();
   }, [key]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      await LearnerService.stats().then((res) => {
+        setStats(res.data);
+      });
+    };
+
+    void fetchStats();
+  }, []);
 
   const addNewCard = (newCard: Flashcard) => {
     setKey(newCard.id);
@@ -57,42 +73,40 @@ function Home() {
             </CardHeader>
             <CardFooter className="flex justify-between">
               <AddCardDialog
-                trigger={<Block>New Flashcard</Block>}
                 title="New Flashcard"
                 addNewCard={addNewCard}
                 idOfSet={0}
-              />
-              <AddSetDialog
-                pushNewSet={() => {
-                  //
-                }}
-                isButton={true}
-              />
+              >
+                <Block>New Flashcard</Block>
+              </AddCardDialog>
+              <AddSetDialog isButton={true} />
             </CardFooter>
           </Card>
           <div className="grid grid-cols-2 gap-4 mt-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardDescription>Study streak</CardDescription>
-                <CardTitle className="text-4xl">[n]</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-xs text-muted-foreground">
-                  Study every day and increase your streak
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
                 <CardDescription>To study</CardDescription>
-                <CardTitle className="text-4xl">[n]</CardTitle>
+                <CardTitle className="text-4xl">{countToStudy}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-xs text-muted-foreground">
-                  Total number of flashcards to be repeated
+                  Total number of flashcards to be repeated. Calculated from the
+                  table.
                 </div>
               </CardContent>
               <CardFooter />
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>Good flashcards</CardDescription>
+                <CardTitle className="text-4xl">{stats.good}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-xs text-muted-foreground">
+                  The number of flashcards you answered with score &quot;
+                  <b>Good</b>&quot;
+                </div>
+              </CardContent>
             </Card>
           </div>
         </div>
@@ -105,7 +119,7 @@ function Home() {
                 shown.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="mb-4">
               <DataTable
                 columns={columns}
                 data={sets.list}

@@ -17,11 +17,6 @@ export interface Set {
   countAll: number;
 }
 
-export interface SetInfo {
-  id: number;
-  name: string;
-}
-
 export default class CardSetService {
   static async getSets(page: number) {
     const res = await axios.get<SetPage>(`/sets?page=${page}&size=11`);
@@ -46,7 +41,7 @@ export default class CardSetService {
   }
 
   static async getAllCardSets() {
-    const res = await axios.get<SetInfo[]>("/sets/all");
+    const res = await axios.get<Set[]>("/sets/all");
     return res.data;
   }
 
@@ -62,8 +57,10 @@ export default class CardSetService {
     return await axios.patch<Set>(`/sets/${id}`, req);
   }
 
-  static async getRepCards(id: number) {
-    const res = await axios.get<Flashcard[]>(`/${id}/repetition`);
+  static async getAllCards(id: number, isCram: boolean) {
+    const res = isCram
+      ? await axios.get<Flashcard[]>(`/sets/${id}/cram`)
+      : await axios.get<Flashcard[]>(`/sets/${id}/repetition`);
     return res.data;
   }
 }

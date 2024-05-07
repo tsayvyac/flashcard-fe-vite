@@ -14,10 +14,9 @@ import { Button } from "@/components/ui/button.tsx";
 import { FormEvent, useState } from "react";
 import { useToast } from "@/components/ui/use-toast.ts";
 import CardSetService, { Set } from "@/api/CardSetService.ts";
-import Block from "@/components/ui/block.tsx";
 
 interface AddSetDialogProps {
-  pushNewSet: (newSet: Set) => void;
+  pushNewSet?: (newSet: Set) => void;
   isButton?: boolean;
 }
 
@@ -29,17 +28,27 @@ function AddSetDialog({ pushNewSet, isButton }: AddSetDialogProps) {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setIsPending(true);
+    if (name.length > 1 && name.length < 32) {
+      setIsPending(true);
 
-    void CardSetService.postSet({ name: name }).then((res) => {
-      pushNewSet(res.data);
-      setIsPending(false);
-      setIsCreateDialogOpen(false);
+      void CardSetService.postSet({ name: name }).then((res) => {
+        if (pushNewSet) {
+          pushNewSet(res.data);
+        }
+        setIsPending(false);
+        setIsCreateDialogOpen(false);
 
-      toast({
-        description: `Set: ${name} was successfully created!`,
+        toast({
+          description: `Set: ${name} was successfully created!`,
+        });
       });
-    });
+    } else {
+      toast({
+        variant: "destructive",
+        description:
+          "Name of set must contain a minimum of 2 and a maximum of 32 characters",
+      });
+    }
   };
 
   return (
@@ -47,11 +56,11 @@ function AddSetDialog({ pushNewSet, isButton }: AddSetDialogProps) {
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogTrigger asChild>
           {isButton ? (
-            <Block variant="outline">New Set</Block>
+            <Button variant="outline">New Set</Button>
           ) : (
-            <button className="rounded-lg border text-card-foreground shadow-sm h-full w-full bg-muted flex justify-center items-center hover:bg-background/80">
+            <Button className="rounded-lg border text-card-foreground shadow-sm h-full w-full bg-muted flex justify-center items-center hover:bg-background/80">
               <Plus className="h-20 w-20 stroke-muted-foreground" />
-            </button>
+            </Button>
           )}
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">

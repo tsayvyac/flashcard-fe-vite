@@ -78,37 +78,41 @@ function SetCard({
       <Card>
         <Link to={`/sets/${id}`}>
           <CardHeader className="group hover:bg-muted/50">
-            <CardTitle className="flex items-center justify-between">
+            <CardTitle className="flex items-center justify-between h-10 overflow-hidden">
               {name}
               {numberOfRep > 0 && <Badge>{numberOfRep}</Badge>}
             </CardTitle>
-            <CardDescription>Number of cards: {numberOfCards}</CardDescription>
+            <CardDescription>
+              Number of flashcards: {numberOfCards}
+            </CardDescription>
           </CardHeader>
         </Link>
         <CardFooter className="flex bg-muted/50 pt-4 justify-between">
           <div className="grid grid-cols-2 gap-2">
             <CoTooltip
-              trigger={
-                <Link
-                  to={`/study/${1}?mode=spaced`}
-                  className={`${buttonVariants({ variant: "default", size: "xm" })} ${numberOfRep === 0 && "pointer-events-none bg-primary/30"} `}
-                >
-                  Study
-                </Link>
-              }
+              className={`${numberOfCards === 0 && "cursor-default"} `}
               description={`${numberOfRep !== 0 ? "Study with spaced repetition" : "No flashcard to study"}`}
-            />
+            >
+              <Link
+                to={`/study/${id}`}
+                state={{ isCram: false, name: name }}
+                className={`${buttonVariants({ variant: "default", size: "xm" })} ${numberOfRep === 0 && "pointer-events-none bg-primary/30"} `}
+              >
+                Study
+              </Link>
+            </CoTooltip>
             <CoTooltip
-              trigger={
-                <Link
-                  to={`/study/${1}?mode=cram`}
-                  className={buttonVariants({ variant: "outline", size: "xm" })}
-                >
-                  Cram
-                </Link>
-              }
+              className={`${numberOfCards === 0 && "cursor-default"} `}
               description="Study all flashcards in this set. Will not affect study progress"
-            />
+            >
+              <Link
+                to={`/study/${id}`}
+                state={{ isCram: true, name: name }}
+                className={`${buttonVariants({ variant: "outline", size: "xm" })} ${numberOfCards === 0 && "pointer-events-none bg-primary/30"} `}
+              >
+                Cram
+              </Link>
+            </CoTooltip>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

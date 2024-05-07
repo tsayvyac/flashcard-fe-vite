@@ -47,31 +47,31 @@ export const columns: ColumnDef<Set>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
                 <CoTooltip
-                  trigger={
-                    <Link
-                      to={`/study/${set.id}?mode=spaced`}
-                      className="w-full flex justify-start"
-                    >
-                      Study
-                    </Link>
-                  }
                   description="Study with spaced repetition"
                   className="w-full"
-                />
+                >
+                  <Link
+                    to={`/study/${set.id}`}
+                    state={{ isCram: false, name: row.getValue("name") }}
+                    className="w-full flex justify-start"
+                  >
+                    Study
+                  </Link>
+                </CoTooltip>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CoTooltip
-                  trigger={
-                    <Link
-                      to={`/study/${set.id}?mode=cram`}
-                      className="w-full flex justify-start"
-                    >
-                      Cram
-                    </Link>
-                  }
                   description="Study all flashcards in this set. Will not affect study progress"
                   className="w-full block"
-                />
+                >
+                  <Link
+                    to={`/study/${set.id}`}
+                    state={{ isCram: true, name: row.getValue("name") }}
+                    className="w-full flex justify-start"
+                  >
+                    Cram
+                  </Link>
+                </CoTooltip>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
