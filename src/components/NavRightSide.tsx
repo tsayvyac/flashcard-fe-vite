@@ -9,8 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { CircleUser } from "lucide-react";
+import { useAuth } from "@/components/context/auth-provider.tsx";
 
 function NavRightSide() {
+  const { logout, learner } = useAuth();
+
   return (
     <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
       <div className="ml-auto flex-1 sm:flex-initial" />
@@ -23,9 +26,9 @@ function NavRightSide() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>{learner?.username}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

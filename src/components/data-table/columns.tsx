@@ -11,43 +11,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
 import CoTooltip from "@/components/CoTooltip.tsx";
+import { Set } from "@/api/CardSetService.ts";
 
-interface SetsToStudy {
-  id: number;
-  title: string;
-  flashcardsToStudy: number;
-}
-
-export const dummy: SetsToStudy[] = [
+export const columns: ColumnDef<Set>[] = [
   {
-    id: 1,
-    title: "Set 1",
-    flashcardsToStudy: 10,
+    accessorKey: "name",
+    header: "Name",
   },
   {
-    id: 2,
-    title: "Set 2",
-    flashcardsToStudy: 6,
-  },
-  {
-    id: 3,
-    title: "Set 3",
-    flashcardsToStudy: 2,
-  },
-];
-
-export const columns: ColumnDef<SetsToStudy>[] = [
-  {
-    accessorKey: "title",
-    header: "Title",
-  },
-  {
-    accessorKey: "flashcardsToStudy",
+    accessorKey: "countRep",
     header: () => <div className="text-right">Flashcards to study</div>,
     cell: ({ row }) => {
       return (
         <div className="text-right">
-          <Badge>{row.getValue("flashcardsToStudy")}</Badge>
+          <Badge>{row.getValue("countRep")}</Badge>
         </div>
       );
     },
@@ -70,28 +47,31 @@ export const columns: ColumnDef<SetsToStudy>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
                 <CoTooltip
-                  trigger={
-                    <Link
-                      to={`/study/${set.id}?mode=spaced`}
-                      className="w-full"
-                    >
-                      Study
-                    </Link>
-                  }
                   description="Study with spaced repetition"
                   className="w-full"
-                />
+                >
+                  <Link
+                    to={`/study/${set.id}`}
+                    state={{ isCram: false, name: row.getValue("name") }}
+                    className="w-full flex justify-start"
+                  >
+                    Study
+                  </Link>
+                </CoTooltip>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CoTooltip
-                  trigger={
-                    <Link to={`/study/${set.id}?mode=cram`} className="w-full">
-                      Cram
-                    </Link>
-                  }
                   description="Study all flashcards in this set. Will not affect study progress"
-                  className="w-full"
-                />
+                  className="w-full block"
+                >
+                  <Link
+                    to={`/study/${set.id}`}
+                    state={{ isCram: true, name: row.getValue("name") }}
+                    className="w-full flex justify-start"
+                  >
+                    Cram
+                  </Link>
+                </CoTooltip>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
