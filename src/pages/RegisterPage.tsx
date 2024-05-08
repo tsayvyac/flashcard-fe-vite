@@ -13,6 +13,11 @@ import { FormEvent, useState } from "react";
 import { useAuth } from "@/components/context/auth-provider.tsx";
 import { ErrorStateRegister, registrationSchema } from "@/util/validation.ts";
 import { Register } from "@/api/LearnerService.ts";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment*/
+/* eslint-disable @typescript-eslint/no-unsafe-member-access*/
+/* eslint-disable @typescript-eslint/no-unsafe-call*/
+/* eslint-disable @typescript-eslint/no-explicit-any*/
+/* eslint-disable @typescript-eslint/no-misused-promises */
 
 function RegisterPage() {
   const [errors, setErrors] = useState<Partial<ErrorStateRegister>>({});
@@ -39,9 +44,9 @@ function RegisterPage() {
           ["existence"]: error.response.data.message,
         });
       });
-    } catch (error) {
-      const temp = {};
-      error.inner.forEach((err) => {
+    } catch (error: any) {
+      const temp: Record<string, any> = {};
+      error.inner.forEach((err: any) => {
         temp[err.path] = err.message;
       });
 

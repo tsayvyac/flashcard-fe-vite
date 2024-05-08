@@ -11,7 +11,6 @@ import Layout from "@/components/Layout.tsx";
 import Home from "@/pages/Home.tsx";
 import Sets from "@/pages/Sets.tsx";
 import Cards from "@/pages/Cards.tsx";
-import CreateCard from "@/components/CreateCard.tsx";
 import ErrorPage from "@/pages/ErrorPage.tsx";
 import LoginPage from "@/pages/LoginPage.tsx";
 import RegisterPage from "@/pages/RegisterPage.tsx";
@@ -44,14 +43,6 @@ const router = createBrowserRouter(
             element={
               <ProtectedRoute>
                 <Cards />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="card"
-            element={
-              <ProtectedRoute>
-                <CreateCard />
               </ProtectedRoute>
             }
           />

@@ -1,4 +1,4 @@
-interface Block {
+export interface BlockProp {
   id: string;
   type: string;
   data: {
@@ -21,7 +21,7 @@ interface Block {
 }
 
 interface ContentProps {
-  block: Block;
+  block: BlockProp;
 }
 
 function Content({ block }: ContentProps) {

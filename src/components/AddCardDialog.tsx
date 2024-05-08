@@ -30,7 +30,7 @@ function AddCardDialog({
   addNewCard,
   isUpdate = {
     isUpd: false,
-    updateCard: (updatedCard: Flashcard) => {
+    updateCard: () => {
       //
     },
     idOfCard: 0,

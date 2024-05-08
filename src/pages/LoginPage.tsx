@@ -13,6 +13,11 @@ import { useAuth } from "@/components/context/auth-provider.tsx";
 import { FormEvent, useState } from "react";
 import { ErrorStateLogin, loginSchema } from "@/util/validation.ts";
 import { Login } from "@/api/LearnerService.ts";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment*/
+/* eslint-disable @typescript-eslint/no-unsafe-member-access*/
+/* eslint-disable @typescript-eslint/no-unsafe-call*/
+/* eslint-disable @typescript-eslint/no-explicit-any*/
+/* eslint-disable @typescript-eslint/no-misused-promises */
 
 function LoginPage() {
   const [errors, setErrors] = useState<Partial<ErrorStateLogin>>({});
@@ -39,9 +44,9 @@ function LoginPage() {
               : "Incorrect login or password",
         });
       });
-    } catch (error) {
-      const temp = {};
-      error.inner.forEach((err) => {
+    } catch (error: any) {
+      const temp: Record<string, any> = {};
+      error.inner.forEach((err: any) => {
         temp[err.path] = err.message;
       });
 

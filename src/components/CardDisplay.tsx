@@ -13,7 +13,10 @@ import {
 } from "@/components/ui/dialog.tsx";
 import Block from "@/components/ui/block.tsx";
 import FlashcardService, { Flashcard } from "@/api/FlashcardService.ts";
-import Content from "@/components/Content.tsx";
+import Content, { BlockProp } from "@/components/Content.tsx";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment*/
+/* eslint-disable @typescript-eslint/no-unsafe-member-access*/
+/* eslint-disable @typescript-eslint/no-unsafe-call*/
 
 interface CardDisplayProps {
   card: Flashcard;
@@ -41,12 +44,12 @@ function CardDisplay({
       <div className="group">
         <div className="grid relative grid-cols-2 grid-rows-[32vh]">
           <div className="p-2 rounded-l-lg border bg-card text-card-foreground shadow-sm overflow-x-hidden break-all overflow-hidden">
-            {JSON.parse(card.front).map((block) => (
+            {JSON.parse(card.front).map((block: BlockProp) => (
               <Content key={block.id} block={block} />
             ))}
           </div>
           <div className="p-2 rounded-r-lg border bg-card text-card-foreground shadow-sm overflow-x-hidden break-all overflow-hidden">
-            {JSON.parse(card.back).map((block) => (
+            {JSON.parse(card.back).map((block: BlockProp) => (
               <Content key={block.id} block={block} />
             ))}
           </div>

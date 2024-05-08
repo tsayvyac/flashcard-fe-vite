@@ -21,8 +21,11 @@ import FlashcardService, {
   Flashcard,
   ScoreNums,
 } from "@/api/FlashcardService.ts";
-import Content from "@/components/Content.tsx";
+import Content, { BlockProp } from "@/components/Content.tsx";
 import Block from "@/components/ui/block.tsx";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment*/
+/* eslint-disable @typescript-eslint/no-unsafe-member-access*/
+/* eslint-disable @typescript-eslint/no-unsafe-call*/
 
 interface LocationState {
   isCram: boolean;
@@ -119,13 +122,13 @@ function Learn() {
         </div>
         <div className="grid grid-cols-1 md:mt-16 mt-8 md:grid-cols-2 md:gap-8 gap-2 md:grid-rows-[60vh] grid-rows-[35vh_35vh]">
           <Card className="block p-4 overflow-y-auto break-all">
-            {JSON.parse(cards[current].front).map((block) => (
+            {JSON.parse(cards[current].front).map((block: BlockProp) => (
               <Content key={block.id} block={block} />
             ))}
           </Card>
           <Card className="block p-4 overflow-y-auto break-all">
             <div className={`${hidden ? "hidden" : "block"}`}>
-              {JSON.parse(cards[current].back).map((block) => (
+              {JSON.parse(cards[current].back).map((block: BlockProp) => (
                 <Content key={block.id} block={block} />
               ))}
             </div>

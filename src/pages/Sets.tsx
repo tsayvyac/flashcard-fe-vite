@@ -30,7 +30,7 @@ function Sets() {
           setIsPending(false);
         })
         .catch((error: AxiosError) => {
-          if (!error.response && error.response.status !== 401) {
+          if (error.response && error.response.status !== 401) {
             toast({
               variant: "destructive",
               title: "Network error",

@@ -9,6 +9,7 @@ import AlignmentBlockTune from "editorjs-text-alignment-blocktune";
 import Underline from "@editorjs/underline";
 import Paragraph from "@editorjs/paragraph";
 import List from "@editorjs/list";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment*/
 
 const EDITOR_JS_TOOLS = {
   list: {
