@@ -40,7 +40,8 @@
     "react-router-dom": "^6.22.3",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "@rollup/rollup-linux-x64-gnu": "^4.17.2"
   },
   "devDependencies": {
     "@editorjs/code": "^2.9.0",
