@@ -56,7 +56,7 @@ function Content({ block }: ContentProps) {
         : (content = `<ol class="ml-5 list-decimal">${listItems}</ol>`);
       break;
     }
-    case "simpleImage": {
+    case "image": {
       const url = block.data.url;
       caption = block.data.caption ?? "";
       const img = `

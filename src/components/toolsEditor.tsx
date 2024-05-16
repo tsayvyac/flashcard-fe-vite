@@ -36,7 +36,9 @@ const EDITOR_JS_TOOLS = {
     },
   },
   marker: Marker,
-  simpleImage: SimpleImage,
+  image: {
+    class: SimpleImage,
+  },
   align: {
     class: AlignmentBlockTune,
     config: {
