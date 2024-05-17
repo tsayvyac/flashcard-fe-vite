@@ -3,7 +3,7 @@
 2. Installed [Node.js](https://nodejs.org/en/download/package-manager)
 
 # How to run?
-> :warning: **You can clone this repository and follow steps below or go to [this](flashcard-fe-vite.vercel.app).**
+> :warning: **You can clone this repository and follow steps below or go to [flashcard-fe-vite.vercel.app](https://flashcard-fe-vite.vercel.app/).**
 
 
 1. Clone this repository
