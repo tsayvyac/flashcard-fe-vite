@@ -11,11 +11,11 @@
 git clone git@github.com:tsayvyac/flashcard-fe-vite.git
 ```
 > :warning: **If you are using a Windows operating system**, please remove the dependency `"@rollup/rollup-linux-x64-gnu": "^4.17.2"` from the `package.json` file before proceeding to the next step.
-2. Go to the folder that was pulled and write in terminal (cmd):
+2. Go to the folder that was cloned and write in terminal (cmd):
 ```
 npm install
 ```
-3. Then after everything is installed, write in the console
+3. Then after everything is installed, write in the terminal (cmd):
 ```
 npm run dev
 ```
