@@ -1,4 +1,4 @@
-> :warning: **You can use [flashcard-fe-vite.vercel.app](https://flashcard-fe-vite.vercel.app/) or follow steps below.**
+> :warning: **You can use [flashcard-fe-vite.vercel.app](https://flashcard-fe-vite.vercel.app/) after starting [backend](https://github.com/tsayvyac/flashcard-be) or follow steps below.**
 
 # Prerequisite
 
