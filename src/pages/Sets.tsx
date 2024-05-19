@@ -91,9 +91,11 @@ function Sets() {
               />
             ))}
           </div>
-          <div className="mt-12">
-            <CoPagination totalPages={sets.totalPages} page={page} />
-          </div>
+          {sets.totalElement !== 0 && (
+            <div className="mt-8">
+              <CoPagination totalPages={sets.totalPages} page={page} />
+            </div>
+          )}
         </>
       ) : (
         <div className="absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]">

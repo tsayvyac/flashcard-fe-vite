@@ -126,9 +126,11 @@ function Cards() {
               />
             ))}
           </div>
-          <div className="mt-8">
-            <CoPagination totalPages={cards.totalPages} page={page} />
-          </div>
+          {cards.totalElement !== 0 && (
+            <div className="mt-8">
+              <CoPagination totalPages={cards.totalPages} page={page} />
+            </div>
+          )}
         </>
       ) : (
         <div className="absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%] text-2xl text-muted-foreground/80">
