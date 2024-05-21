@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8080/api/v1";
+// "http://localhost:8080/api/v1"
+axios.defaults.baseURL = "http://172.16.180.154:8080/api/v1";
 
 axios.interceptors.response.use(
   (response) => {
@@ -13,7 +14,7 @@ axios.interceptors.response.use(
       if (learner !== null || token !== null) {
         localStorage.removeItem("token");
         localStorage.removeItem("learner");
-        window.location.href = "http://localhost:3000/login";
+        window.location.href = "http://172.16.180.154:3000/login";
       }
     }
     return Promise.reject(error);
