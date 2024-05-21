@@ -1,11 +1,11 @@
+> :warning: **You can use [flashcard-fe-vite.vercel.app](https://flashcard-fe-vite.vercel.app/) after starting [backend](https://github.com/tsayvyac/flashcard-be) or follow steps below.**
+
 # Prerequisite
 
 1. Started [backend](https://github.com/tsayvyac/flashcard-be)
 2. Installed [Node.js](https://nodejs.org/en/download/package-manager)
 
 # How to run?
-
-> :warning: **You can clone this repository and follow steps below or go to [flashcard-fe-vite.vercel.app](https://flashcard-fe-vite.vercel.app/).**
 
 1. Clone this repository
 
