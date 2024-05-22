@@ -86,7 +86,7 @@ function CardDisplay({
                 <DialogFooter>
                   <Button onClick={() => handleDelete(card.id)}>Delete</Button>
                   <DialogClose>
-                    <Button variant="outline">Do not delete</Button>
+                    <Block variant="outline">Do not delete</Block>
                   </DialogClose>
                 </DialogFooter>
               </DialogContent>
